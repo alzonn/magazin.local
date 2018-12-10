@@ -44,10 +44,7 @@ Select date, count(*) kolo from zakazy WHERE date >= '$d1' AND date < '$d2' grou
 .sub {margin: 32px auto;  display: block;   height: 36px;  width: 139px;}
 form span {  display: inline-block;   }
 form span label {  display: block;}
-
-
 form .range, form .average { display: block; padding: 1rem 0; width: 100%;}
-
 form .range input[type="range"], form .average input[type="range"] {
     -webkit-appearance: none; background-color: silver; border-radius: 4px;
     display: block; height: 8px;pointer-events: none; position: absolute;
@@ -184,6 +181,8 @@ function zeMax(val) {
     var min = id('min').value;
     if(val < min) { id('min').value= Number(val) - 172800};
 }
+
+
 
 var blok = document.querySelectorAll(".tovv");
 var to = 0, z=1;

@@ -37,7 +37,6 @@ include ("connect.php");
                     <h2 id="h2">интернет - магазин с доставкой (1-3 дня)<br>
                  <small>(плюс доставка почтой в ваш город)</small>   <br>
                      тел: +79302845316</h2>
-
               </div>
               <img src="fotos/ргасе0.png" id="img">
 
@@ -67,8 +66,6 @@ include ("connect.php");
 <div class="poisk2" id="vyvod"></div>
 <p class="poisk1"> или полистать тематические разделы меню</p>
 
-
-
 <a name="v"> </a>
                      <!--кнопки выбора меню-->
 
@@ -93,8 +90,7 @@ include ("connect.php");
 <center id="telo2"><div class="telo0"> ИГРЫ ДЛЯ ВСЕХ ДЕТЕЙ</div>
 
 <?php
-
-$res = mysql_query( "SELECT * FROM $table WHERE x=1" ,$link);
+/*$res = mysql_query( "SELECT * FROM $table WHERE x=1" ,$link);
 if(mysql_num_rows($res)>0){
 $row = mysql_fetch_array($res);
 do{ echo '
@@ -105,10 +101,8 @@ do{ echo '
 <div class="idtov">'.$row["id"].'</div>
 </div>'; }
 
-while ($row = mysql_fetch_array($res));
-}
-
-?>
+while ($row = mysql_fetch_array($res));}
+*/?>
 </center>
 <center id="telo3"><div class="telo0"> ИГРЫ ДЛЯ ДВОИХ ВЛЮБЛЕННЫХ </div></center>
 <center id="telo4"><div class="telo0"> ИГРЫ ДЛЯ КОМПАНИИ ВЗРОСЛЫХ</div></center>
@@ -132,18 +126,16 @@ while ($row = mysql_fetch_array($res));
         while ($row = mysql_fetch_array($res));   }
     ?>
 </div>
-///
+
 
 
 <!--<a id="upbut" href="#v" >ВЕРНУТЬСЯ К МЕНЮ</a>-->
 <div class="foot"> Где купить, заказать взрослые и детские игры - можно в нашем интернет - магазине для детей и взрослых, для всей семьи.  Для поклонников активных игр в большой компании друзей  имеется большой выбор настольных игрушек. Популярные интеллектуальные игры для активных мальчиков и девочек на одного, на двоих или на компанию за столом.  Настольные  алкогольные игры для взрослых вечеринок, влюбленных подарят вам мгновения и эмоции, которые будет трудно забыть в будущем. А для ребенка, дочки или сыночка это пиратские игры, обучабщие конструкторы, ходилка и логические, которые развивают эрудицию, предлагают детям отгадывать загадки. Приключения для мальчиков и девочек, необычные развивающие игры для самых маленьких детей до 4 5 6 7 8 лет. Для школы и детского сада. В нашем магазине вы получаете возможность выбрать товар, который вам понравился больше всего. Это лучший подарок на день рождения, праздник, новый год, юбилей, девушке или парню! Осуществляем доставку по вашему адресу Нижнего Новгорода.<br>
-
 </div>
 
 <a class="st" href="zakaz.php" target="_blank">заказы покупателей</a>
 <a class="st" href="zagruzka.php" target="_blank">загрузка товара</a>
 <a class="st" href="grafik.php" target="_blank">статистика</a>
-
 
                                <!--корзинка-->
 <div id ="korz0">
@@ -155,7 +147,6 @@ while ($row = mysql_fetch_array($res));
 </div>
 
 
-
                                <!--форма топравки-->
 <div id="zakaz">
     <div class="zakaz2">
@@ -163,7 +154,6 @@ while ($row = mysql_fetch_array($res));
             <div id="tovar"><div id="summ"></div> </div>
 
             <form   >
-
                 <input type="text" id="nm" name="fio" maxlength="11" placeholder="ваше имя" class="form1" required/>
                 <input type="text" class="form1" id="focus" name="tel"
                        placeholder="оплата" required  maxlength="11"/>

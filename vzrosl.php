@@ -6,8 +6,6 @@ $kat = $_COOKIE["kategor"];
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
