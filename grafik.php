@@ -49,7 +49,6 @@ form .range input[type="range"], form .average input[type="range"] {
     -webkit-appearance: none; background-color: silver; border-radius: 4px;
     display: block; height: 8px;pointer-events: none; position: absolute;
     outline: none; width: 400px;}
-
 form .range input[type="range"]::-webkit-slider-thumb, form .average input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none; background-color: gray; border-radius: 50%;
     cursor: -webkit-grab;  cursor: -moz-grab; height: 20px;
