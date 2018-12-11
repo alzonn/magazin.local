@@ -84,7 +84,6 @@ include ("connect.php");
 </div>
 
 
-
                               <!--отрисованные категории-->
 <center id="telo"> <div class="telo0"> ИГРЫ ДЛЯ ВСЕХ ВЗРОСЛЫХ</div></center>
 <center id="telo2"><div class="telo0"> ИГРЫ ДЛЯ ВСЕХ ДЕТЕЙ</div>
