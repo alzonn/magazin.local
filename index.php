@@ -1,5 +1,5 @@
 <?php
-include ("connect.php");
+/*include ("connect.php");*/
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ include ("connect.php");
                  <small>(плюс доставка почтой в ваш город)</small>   <br>
                      тел: +79302845316</h2>
               </div>
-              <img src="fotos/ргасе0.png" id="img">
+             <!-- <img src="fotos/ргасе0.png" id="img">-->
 
 
   <div id="login-button">
