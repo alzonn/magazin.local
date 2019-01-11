@@ -19,7 +19,7 @@ Select date, count(*) kolo from zakazy WHERE date >= '$d1' AND date < '$d2' grou
     if(mysql_num_rows($res0)>0){
     $row = mysql_fetch_array($res0);
     do{ $date []=  $row["date"];
-        $kolo []= $row["kolo"];   }
+        $kolo []= $row["kolo"]; }
      while ($row = mysql_fetch_array($res0)); }
 
 //print_r($date);  print_r($kolo);
@@ -31,17 +31,16 @@ Select date, count(*) kolo from zakazy WHERE date >= '$d1' AND date < '$d2' grou
 <title> графики</title>
 <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" ></script>
-
+    <script src="jquery-3.3.1.min.js"></script>
  <style>
  body { background-color: #d2fdff; font-family: arial;}
 .zak {padding: 25px 0; letter-spacing: 4px; color: white; width: 344px;  text-align: center;
           border-radius: 13px;  font-size: 37px;background-color: #719be6; margin:30px auto;}
-
  #chart2, #chart{float: left;}
 #sat{margin: 0 auto 62px; display: block; width: 191px; }
 .dat {float: left; margin: 110px 22px 11px;}
 .dat2 {float: left; margin: 1px 22px 11px;}
-.sub {margin: 32px auto;  display: block;   height: 36px;  width: 139px;}
+#sub {margin: 32px auto;  display: block;   height: 36px;  width: 139px; border: 2px solid #f78d06;}
 form span {  display: inline-block;   }
 form span label {  display: block;}
 form .range, form .average { display: block; padding: 1rem 0; width: 100%;}
@@ -104,7 +103,8 @@ $res = mysql_query( "Select adres, count(*) koll from zakazy group by adres" ,$l
  <input type="range" min="" max="" value="1535144400" id="min"  step="86400" onchange="zeMin(this.value)">
  <input type="range" min="" max="" value="1537390800" id="max"  step="86400" onchange="zeMax(this.value)">
      </div>
-      <input class= "sub" name="sub" type="submit" value = "показать" />
+     <!-- <input id= "sub" name="sub" type="submit" value = "изменения" />-->
+    <div id= "sub"> изменения</div>
 </form>
 </div>
 
@@ -131,18 +131,18 @@ if(mysql_num_rows($res)>0){
 </div>
 
 <script>
-    var id = function (id) {return document.getElementById(id);   }
+    var id = function (id) {return document.getElementById(id); }
 
 var a=b=c=d=[];
     	 a = <?php echo  json_encode($gorod)  ?>;
     	 b = <?php echo  json_encode($kolich) ?>;
     	 c = <?php echo  json_encode($date) ?>;
     	 d = <?php echo  json_encode($kolo) ?>;
-    	 console.log(c);      console.log(d);
+    	// console.log(c);      console.log(d);
     		var chart = document.getElementById('chart');
-    	    var chart2 = document.getElementById('chart2');
+
     		var myChart = echarts.init(chart);
-    		var myChart2 = echarts.init(chart2);
+
     		var option = {
     			title: { text: 'продажи по городам' },
     			tooltip: { },
@@ -151,15 +151,25 @@ var a=b=c=d=[];
     			yAxis: { },
     			series: [{	name: 'продажи', type: 'bar',data: b}]
     		};
-  var option2 = {	title: { text: 'заказы по датам' },
-                	tooltip: { },
-                	 //legend: { data: [ 'продажи' ] },
-                			xAxis: { data: c },
-                			yAxis: { },
-                			series: [{  name: 'продажи',  type: 'line',   smooth: true,   data: d   }]
-                		};
+
     		myChart.setOption(option);
-    		myChart2.setOption(option2);
+
+    		document.addEventListener( 'build',  graf);
+                function graf (e,c,d){
+           if (e){ var u = JSON.parse(e.detail);}
+
+        var chart2 = document.getElementById('chart2');
+        var myChart2 = echarts.init(chart2);
+        var option2 = {	title: { text: 'заказы по датам' },
+            tooltip: { },
+            //legend: { data: [ 'продажи' ] },
+            xAxis: { data: u.a ||c },
+            yAxis: { },
+            series: [{  name: 'продажи',  type: 'line',   smooth: true,   data: u.b ||d  }]
+        };
+        myChart2.setOption(option2);
+    };
+   /* graf (c,d);*/
 
 
 
@@ -170,18 +180,56 @@ id('max').max=new Date('2018.10.01').getTime() / 1000;
 id('min').value= "1535144400";
 id('max').value= "1537390800";
 
+    var zn ={min:"2018-08-26", max: "2018-09-11"}; var ch=0;
 function zeMin(val) {
-    id('minText').value = moment(val*1000).format('YYYY-MM-DD');
+   var mi=  id('minText').value = moment(val*1000).format('YYYY-MM-DD');
     var max = id('max').value;
     if(val > max) { id('max').value= Number(val) + 172800};
+    zn.min = mi;
+    ayx(zn);
 }
 function zeMax(val) {
-    id('maxText').value = moment(val*1000).format('YYYY-MM-DD');
+    var ma= id('maxText').value = moment(val*1000).format('YYYY-MM-DD');
     var min = id('min').value;
     if(val < min) { id('min').value= Number(val) - 172800};
+    zn.max = ma;
+  ayx(zn);
 }
+   //  console.log(zn);
+
+    function ayx(b) {
+        // var jon = JSON.stringify(b);
+            $.ajax({
+            type: "POST",
+            cashe:false,
+            url: 'ayax_graf.php',
+            data: {
+                // data: jon,
+                min: b.min,
+                max: b.max
+            },
+            success: function(res) {
+                // Создание события
+                var event = new CustomEvent('build', { 'detail': res });
+// target события может быть любой элемент
+                document.dispatchEvent(event);
+
+              /*  var u = JSON.parse(res);
+                id('sub').addEventListener("DOMSubtreeModified", function() {
+                    graf (u.a, u.b);  });
+                ch++;
+                id('sub').innerHTML = "изменения  " + ch;*/
+            }
+        });
+    };
+    console.log();
 
 
+
+
+
+
+                             /* крутящийся слайдер*/
 
 var blok = document.querySelectorAll(".tovv");
 var to = 0, z=1;
@@ -208,7 +256,6 @@ id('nazad').onclick = function () {
             blok[x].style.transform= "perspective(416px) rotatey(180deg)";   }}
     blok[to].style.zIndex=z; z++;
     blok[to].style.transform = "perspective(416px) rotatey(0deg)";
-
 }
 
 

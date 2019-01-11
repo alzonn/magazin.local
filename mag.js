@@ -457,7 +457,7 @@ get("res").onclick = function () {
 
 
 /*    форма c заказами отправка*/
-    var jsn =[]; var ida=0;var ida2=0;
+    var jsn =[]; var ida=0; var ida2=0;
     get("sub").onclick = function (e) {
       /*  if (get("focus").value.length != 11){
             alert ("проверьте кол-во цифр в номере");*/
