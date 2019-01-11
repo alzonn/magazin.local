@@ -61,10 +61,10 @@
 
                      <!--поиск по названию-->
 
-<!--<p class="poisk0"> На нашем сайте Вы можете воспользоваться поиском игр по названию </p>
+<p class="poisk0"> На нашем сайте Вы можете воспользоваться поиском игр по названию </p>
 <input type="text" name="pois" placeholder="введите название игры" class="poisk" id="poisk" />
 <div class="poisk2" id="vyvod"></div>
-<p class="poisk1"> или полистать тематические разделы меню</p>-->
+<p class="poisk1"> или полистать тематические разделы меню</p>
 
 <a name="v"> </a>
                      <!--кнопки выбора меню-->
@@ -108,7 +108,7 @@ while ($row = mysql_fetch_array($res));}
 <center id="telo5"><div class="telo0"> ДЕТСКИЕ СЕМЕЙНЫЕ ИГРЫ</div></center>
 <center id="telo6"><div class="telo0"> ДЕТСКИЕ РАЗВИВАЮЩИЕ ИГРЫ</div></center>
 
-  <div class="telo0" style=" text-align: center;"> ХИТЫ ПРОДАЖ </div>
+ <!-- <div class="telo0" style=" text-align: center;"> ХИТЫ ПРОДАЖ </div>-->
 <div class=" multiple-items">
 
  <?php
